@@ -13,14 +13,13 @@ export function validateSlots(
     slots: any[]
 ): [Date, Date][] {
 
-    let currentMoment = moment.tz(currentTime, userTimezone).add(1, 'hours');  // +1 hour from current
+    let currentMoment = moment.tz(currentTime, userTimezone).add(1, 'hours');
     let lastFreeMoment = moment.tz(lastFreeDate, userTimezone);
 
     let availableSlots: [Date, Date][] = [];
 
     for (let slot of slots) {
         let [slotStart, slotEnd] = extractSlotDates(slot, userTimezone);
-        // console.log(slotStart, currentMoment, slotEnd, slotEnd);
 
         // If the slot start is at least an hour after the current time
         // and the end of the slot is after the last free moment
@@ -34,7 +33,6 @@ export function validateSlots(
         }
     }
 
-    console.log(availableSlots)
     return availableSlots;
 }
 
@@ -47,7 +45,6 @@ const isSlotBooked = (bookedAppointmentTimes: BookedAppointments[], slotStart: m
             return true;
         }
     }
-    console.log(false);
     return false;
 };
 
